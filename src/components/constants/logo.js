@@ -1,0 +1,1 @@
+export const logo = "./Copilot_20250912_191729.png"
