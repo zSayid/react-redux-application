@@ -1,0 +1,39 @@
+.input-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 1rem 0.75rem 0.5rem; /* give space for floating label */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+  }
+  
+  .input-field:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+  }
+  
+  .input-label {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.2s ease all;
+    background: #fff;   /* mask border behind label */
+    padding: 0 0.25rem; /* space around text */
+    color: #aaa;
+    pointer-events: none;
+  }
+  
+  .input-label.active {
+    top: 0; /* move to border line */
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: #007bff;
+  }
+  
