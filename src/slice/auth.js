@@ -22,9 +22,9 @@ export const authSlice = createSlice({
     },
     signUserFailure: (state, action) => {
       state.isLoading = false;
-      state.error = action.payload;
       state.loggedIn = false;
-    }
+      state.error = action.payload; 
+    },
   },
 });
 

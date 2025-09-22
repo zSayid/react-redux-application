@@ -3,15 +3,25 @@ import { generateToken } from "../utils/generateToken.js";
 import bcrypt from "bcryptjs";
 
 export const registerUser = async (req, res) => {
-  if (!req.body) {
-    return res.status(400).json({ message: "Request body is missing" });
+  const { name, email, password } = req.body;
+  const errors = [];
+
+  if (!name) errors.push("Name is required.");
+  if (!email) errors.push("Email is required.");
+  if (!password) errors.push("Password is required.");
+  if (password && password.length < 8) {
+    errors.push(
+      "Password must be at least 8 characters long"
+    );
   }
 
-  const { name, email, password } = req.body;
+  if (errors.length > 0) {
+    return res.status(400).json({ errors });
+  }
 
   const userExists = await User.findOne({ email });
   if (userExists) {
-    return res.status(400).json({ message: "User already exists" });
+    return res.status(400).json({ errors: ["User already exists."] });
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -21,7 +31,6 @@ export const registerUser = async (req, res) => {
     name,
     email,
     password: hashedPassword,
-
   });
   await user.save();
 
@@ -36,11 +45,15 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-  if (!req.body) {
-    return res.status(400).json({ message: "Input field is required" });
-  }
-
   const { email, password } = req.body;
+  const errors = [];
+
+  if (!email) errors.push("Email is required.");
+  if (!password) errors.push("Password is required.");
+
+  if (errors.length > 0) {
+    return res.status(400).json({ errors });
+  }
 
   const user = await User.findOne({ email });
 
@@ -52,6 +65,6 @@ export const loginUser = async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(401).json({ message: "Invalid email or password" });
+    res.status(401).json({ errors: ["Invalid email or password."] });
   }
 };

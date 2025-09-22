@@ -6,7 +6,7 @@ const Input = ({
   type = "text", 
   state, 
   setState, 
-  required = false, 
+  // required = false, 
   className = "" 
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -22,7 +22,7 @@ const Input = ({
         onChange={(e) => setState(e.target.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        required={required}
+        // required={required}
         className="input-field"
       />
       <label

@@ -9,39 +9,18 @@ import {
   signUserFailure,
 } from "../slice/auth";
 import AuthService from "../service/auth";
-import { validatePassword } from "../utils/validation";
+import ValidationError from "../utils/validation-error";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(""); // State for password error
-  const [emailError, setEmailError] = useState(""); // State for email error
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.auth.isLoading);
 
   const submitLoginHandler = async (e) => {
     e.preventDefault();
 
-    // Validate email and password fields
-    if (!email) {
-      setEmailError("Email is required.");
-    } else {
-      setEmailError("");
-    }
-
-    if (!password) {
-      setPasswordError("Password is required.");
-      return;
-    }
-
-    if (!validatePassword(password)) {
-      setPasswordError("Password must be at least 8 characters long.");
-      return;
-    }
-
-    setPasswordError(""); // Clear error if validation passes
-
-    if (emailError) return; // Prevent submission if email error exists
 
     dispatch(signUserStart());
     const user = { email, password };
@@ -53,7 +32,14 @@ const Login = () => {
       setPassword("");
     } catch (error) {
       console.error("API Error:", error); 
-      dispatch(signUserFailure(error.response.errors));
+      // Dispatch error with proper structure
+      dispatch(
+        signUserFailure({
+          data: {
+            errors: error.response?.data?.errors || ["An unexpected error occurred."],
+          },
+        })
+      );
     }
   };
 
@@ -71,7 +57,7 @@ const Login = () => {
             className="gap-3"
             setState={setEmail}
           />
-          {emailError && <p style={{ color: "red" }}>{emailError}</p>} {/* Display email error */}
+
           <Input
             type={"password"}
             label={"Password"}
@@ -79,7 +65,7 @@ const Login = () => {
             className="gap-3"
             setState={setPassword}
           />
-          {passwordError && <p style={{ color: "red" }}>{passwordError}</p>} {/* Display password error */}
+          <ValidationError />
           <button
             className="w-100 btn btn-lg btn-primary mt-2"
             type="submit"
