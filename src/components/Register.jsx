@@ -1,14 +1,15 @@
 import Logo from "../ui/Logo";
 import Input from "../ui/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signUserStart,
-  signUserSuccess,
+  registerSuccess,
   signUserFailure,
 } from "../slice/auth";
 import AuthService from "../service/auth";
 import ValidationError from "../utils/validation-error";
+import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
@@ -17,7 +18,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.auth.isLoading);
+  const {isLoading, loggedIn} = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const submitSignUpHandler = async (e) => {
     e.preventDefault();
@@ -26,16 +28,18 @@ const Register = () => {
 
     try {
       const response = await AuthService.userRegister(user);
-      console.log("API Response:", response); // Debugging log
-      dispatch(signUserSuccess());
-      setName(""); 
-      setEmail(""); 
-      setPassword(""); 
+      dispatch(registerSuccess(response.data));
+      navigate("/login");  
     } catch (error) {
       console.log(error.response);
       dispatch(signUserFailure(error.response));
     }
   };
+  useEffect(() => {
+    if (loggedIn) {
+      navigate('/')
+    }
+  }, [ loggedIn, navigate]);
 
   return (
     <div className="text-center mt-5">

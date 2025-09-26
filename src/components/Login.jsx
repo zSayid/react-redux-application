@@ -1,47 +1,49 @@
 import Logo from "../ui/Logo";
 import Input from "../ui/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import {
-  signUserStart,
-  signUserSuccess,
-  signUserFailure,
-} from "../slice/auth";
+import { signUserStart, signUserSuccess, signUserFailure } from "../slice/auth";
 import AuthService from "../service/auth";
 import ValidationError from "../utils/validation-error";
-
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.auth.isLoading);
+  const { isLoading, loggedIn } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const submitLoginHandler = async (e) => {
     e.preventDefault();
-
 
     dispatch(signUserStart());
     const user = { email, password };
 
     try {
       const response = await AuthService.userLogin(user);
-      dispatch(signUserSuccess(response.data)); 
-      setEmail("");
-      setPassword("");
+      dispatch(signUserSuccess(response.data));
+      navigate("/");
     } catch (error) {
-      console.error("API Error:", error); 
-      // Dispatch error with proper structure
+      console.error("API Error:", error);
       dispatch(
         signUserFailure({
           data: {
-            errors: error.response?.data?.errors || ["An unexpected error occurred."],
+            errors: error.response?.data?.errors || [
+              "An unexpected error occurred.",
+            ],
           },
         })
       );
     }
   };
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate('/');
+    }
+  }, [loggedIn, navigate]);
 
   return (
     <div className="tex-center mt-5" onSubmit={submitLoginHandler}>
