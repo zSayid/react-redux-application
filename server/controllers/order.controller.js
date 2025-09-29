@@ -1,21 +1,21 @@
 import Order from "../model/order.model.js";
-import Course from "../model/course.model.js";
+import Product from "../model/product.model.js";
 
-export const buyCourse = async (req, res) => {
-  const { courseId } = req.body;
+export const buyProduct = async (req, res) => {
+  const { productId } = req.body;
 
-  const course = await Course.findById(courseId);
-  if (!course) return res.status(404).json({ message: "Course not found" });
+  const product = await Product.findById(productId);
+  if (!product) return res.status(404).json({ message: "Product not found" });
 
   const order = await Order.create({
     user: req.user._id,
-    course: courseId,
+    product: productId,
   });
 
   res.status(201).json(order);
 };
 
 export const getUserOrders = async (req, res) => {
-  const orders = await Order.find({ user: req.user._id }).populate("course");
+  const orders = await Order.find({ user: req.user._id }).populate("product");
   res.json(orders);
 };

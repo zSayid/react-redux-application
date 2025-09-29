@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import authReducer from '../slice/auth';
+import AuthReducer from '../slice/auth';
+import CourseReducer from '../slice/course';
+
 
 export default configureStore({
   reducer: {
-    auth: authReducer,
+    auth: AuthReducer,
+    course: CourseReducer
   },
   devTools: process.env.NODE_ENV !== 'production',
 })

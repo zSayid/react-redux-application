@@ -28,32 +28,33 @@ const Navbar = () => {
           }}
         />
       </Link>
-      <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        {loggedIn ? (
-          <>
-            <p className="me-3 py-2 m-0 text-dark text-decoration-none">{`Welcome, ${user?.name}`}</p>
+      <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
+  {loggedIn ? (
+    <>
+      <p className="mb-0 me-5 fw-medium fs-3 text-dark">
+        {`Welcome, ${user?.name}`}
+      </p>
 
-            <button className="btn btn-outline-danger" onClick={logoutHandler}>
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link
-              className="me-3 py-2 text-dark text-decoration-none"
-              to={"/login"}
-            >
-              Login
-            </Link>
-            <Link
-              className="me-3 py-2 text-dark text-decoration-none"
-              to={"/register"}
-            >
-              Register
-            </Link>
-          </>
-        )}
-      </nav>
+      <button
+        className="btn btn-outline-danger me-5"
+        style={{ height: "2.5rem" }} // kept only if needed
+        onClick={logoutHandler}
+      >
+        Logout
+      </button>
+    </>
+  ) : (
+    <>
+      <Link className="me-3 py-2 text-dark text-decoration-none" to="/login">
+        Login
+      </Link>
+      <Link className="me-3 py-2 text-dark text-decoration-none" to="/register">
+        Register
+      </Link>
+    </>
+  )}
+</nav>
+
     </div>
   );
 };
