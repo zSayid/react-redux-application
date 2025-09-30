@@ -15,8 +15,8 @@ const AuthService = {
     return response;
   },
 
-  getCourses() {
-    const response = axios.get("/courses");
+  getProducts() {
+    const response = axios.get("/products");
     return response;
   },
 };

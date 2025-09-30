@@ -1,8 +1,8 @@
 import axios from "./api";
 
 const AuthCourseService = {
-  async getCourses() {
-    const response = await axios.get("/courses");
+  async getProducts() {
+    const response = await axios.get("/products");
     return response.data;
   },
 };

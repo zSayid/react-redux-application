@@ -1,9 +1,11 @@
 import Product from "../model/product.model.js";
 
 export const getProducts = async (req, res) => {
-  const products = await Product.find();
+  // randomly select 50 products from the database
+  const products = await Product.aggregate([{ $sample: { size: 11369 } }]);
   res.json(products);
 };
+
 
 export const getProductById = async (req, res) => {
   const product = await Product.findById(req.params.id);
