@@ -1,0 +1,121 @@
+.checkout-wrapper {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+    background: #fefefe;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .checkout-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  .checkout-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .checkout-card {
+    display: flex;
+    gap: 1rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  }
+  
+  .checkout-img {
+    width: 120px;
+    object-fit: contain;
+  }
+  
+  .checkout-info {
+    flex-grow: 1;
+  }
+  
+  .checkout-price {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .checkout-summary {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    background: #f1f1f1;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .checkout-payment {
+    margin-top: 2rem;
+  }
+  
+  .payment-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  
+  .payment-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  }
+  
+  .payment-icon {
+    width: 40px;
+    height: auto;
+  }
+  
+  .checkout-btn {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .checkout-btn:hover {
+    background: #0056b3;
+  }
+
+  .card-details {
+    margin-top: 2rem;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .card-details input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .card-row {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .card-row input {
+    flex: 1;
+  }
+  

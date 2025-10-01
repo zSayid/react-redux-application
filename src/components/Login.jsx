@@ -48,7 +48,7 @@ const Login = () => {
   return (
     <div className="tex-center mt-5" onSubmit={submitLoginHandler}>
       <main className="form-signin w-25 m-auto">
-        <form className="form-control">
+        <form className="form-control p-5">
           <Logo />
           <div className="text-center">
             <h3 className="h3 mb-4">Please sign in</h3>

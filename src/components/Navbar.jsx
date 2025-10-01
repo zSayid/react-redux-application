@@ -3,9 +3,13 @@ import logo from "./constants/Copilot_20250912_191729.png";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItem } from "../helpers/persistence-storage";
 import { logoutUser } from "../slice/auth";
+import { IoMdCart } from "react-icons/io";
+
 
 const Navbar = () => {
   const { loggedIn, user } = useSelector((state) => state.auth);
+  const {items} = useSelector(state => state.cart)
+  console.log(items)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,7 +20,13 @@ const Navbar = () => {
   };
 
   return (
-    <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom container pt-3">
+    <div className="d-flex flex-md-row align-items-center pb-3 mb-4 border-bottom container pt-0 fixed-top"
+    style={{
+      backgroundColor: "#fff",   
+      padding: "0.75rem 2rem",   
+      zIndex: 1030,             
+    }}
+>
       <Link to={"/"}>
         <img
           src={logo}
@@ -29,6 +39,11 @@ const Navbar = () => {
         />
       </Link>
       <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
+      <Link to="/cart" className="btn btn-outline-primary me-3">
+      <IoMdCart />
+      Cart ({items.length})
+      </Link>
+
   {loggedIn ? (
     <>
       <p className="mb-0 me-5 fw-medium fs-3 text-dark">
@@ -45,12 +60,14 @@ const Navbar = () => {
     </>
   ) : (
     <>
-      <Link className="me-3 py-2 text-dark text-decoration-none" to="/login">
-        Login
-      </Link>
-      <Link className="me-3 py-2 text-dark text-decoration-none" to="/register">
-        Register
-      </Link>
+{/* Styled login and register buttons */}
+<Link className="btn btn-outline-primary me-2" to="/login">
+  Login
+</Link>
+<Link className="btn btn-primary me-2" to="/register">
+  Register
+</Link>
+
     </>
   )}
 </nav>

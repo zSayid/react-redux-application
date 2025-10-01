@@ -1,0 +1,24 @@
+.receipt-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .receipt-container table {
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+  }
+  
+  .receipt-container th, td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .qr-section {
+    margin-top: 2rem;
+    text-align: center;
+  }

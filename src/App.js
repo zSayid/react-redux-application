@@ -6,6 +6,8 @@ import { signUserSuccess } from "./slice/auth";
 import AuthService from "./service/auth";
 import AuthCourseService from "./service/product.apiService";
 import { getProductStart, getProductSuccess } from "./slice/product.slice";
+import Cart from "./components/Cart";
+import CheckOut from "./components/CheckOut";
 
 const App = () => {
   const { loggedIn } = useSelector((state) => state.auth);
@@ -38,6 +40,8 @@ const App = () => {
     <div>
       <Navbar />
       <Routes>
+        <Route path="/checkout" element={<CheckOut />} />
+        <Route path="*" element={<Cart />} />
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

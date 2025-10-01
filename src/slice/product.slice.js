@@ -27,17 +27,19 @@ const productSlice = createSlice({
       state.status = "failed";
     },
 
-
     // Action to add a new item
     addProduct: (state, action) => {
       state.products.push(action.payload);
     },
+
     // Action to select a item
     selectProduct: (state, action) => {
       state.isloading = false;
       state.selectedProduct = action.payload;
       state.status = "succeeded";
     },
+
+   
   },
 });
 
@@ -47,5 +49,6 @@ export const {
   getProductFailure,
   addProduct,
   selectProduct,
+
 } = productSlice.actions;
 export default productSlice.reducer;
